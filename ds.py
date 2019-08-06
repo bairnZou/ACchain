@@ -2,6 +2,7 @@ class txn:
         proof_value = 0
         count = 0
         becounted = False
+        
         def __init__(self, index):
             self.proof_value = index
 
@@ -16,6 +17,7 @@ class value:
         owner = 0
         proof = []
         ownproof = []
+
         def __init__(self, ori_node):
             self.owner = ori_node
 
