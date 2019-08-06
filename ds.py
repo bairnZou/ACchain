@@ -1,8 +1,14 @@
 class txn:
-    def __init__(self):
-        self.proof = []
+    def __init__(self, index):
+        self.proof_value = index
         self.count = 0
         self.becounted = 0
+
+
+class TXN:
+    def __init__(slef, N):
+        slef.txn = 
+
 
 
 class value:
@@ -17,3 +23,8 @@ class value:
 
     def add_proof(self, newproof):
         self.proof.append(newproof)
+
+class Node:
+
+    def __init__(self,N,M):
+        self.node = 
