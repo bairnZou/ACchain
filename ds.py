@@ -7,10 +7,10 @@ class txn:
             self.proof_value = index
 
 
-class TXN:
+#class TXN:
 
-    def __init__(slef, N):
-        slef.txn = 
+ #   def __init__(slef, N):
+  #      slef.txn = 
 
 
 class value:
@@ -27,10 +27,20 @@ class value:
         def add_proof(self, newproof):
             self.proof.append(newproof)
     
-        def change_ownproof(self,):
-
+        def add_ownproof(self,newproof):
+            self.ownproof.append(newproof)
+        
+        def change_ownproof(self,newproof):
+            self.ownproof.
 
 class Node:
-
+    nodes = [][]
+    
     def __init__(self,N,M):
-        self.node = 
+        for i in range(N):
+            for j in range(M):
+                self.nodes[i][j] = value(i)
+    
+    def trade(self,i,j,k):
+        for _ in slef.nodes[i]:
+            
