@@ -6,17 +6,16 @@ import random as rd
 
 def main():
     argvs = sys.argv
-    try:    
-        
+    if len(argvs) < 6:
+        sys.exit(0)
 
-    except len(argvs) < 6:
-        print('argv num error')
-        sys.exit()
-    
-    for:
-        N = int(sys.argv[1])
-        NumofV = int(sys.argv[2])
-        m = int (sys.argv[3])
+    N = int(sys.argv[1])
+    NumofV = int(sys.argv[2])
+    m = int(sys.argv[3])
+    TPS = int(sys.argv[4])
+    T = int(sys.argv[5]) 
+       
+
         
     
 

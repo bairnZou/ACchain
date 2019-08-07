@@ -2,7 +2,7 @@ class txn:
         proof_value = 0
         count = 0
         becounted = False
-        
+
         def __init__(self, index):
             self.proof_value = index
 
@@ -33,14 +33,15 @@ class value:
         def change_ownproof(self,newproof):
             self.ownproof.
 
+
 class Node:
-    nodes = [][]
-    
-    def __init__(self,N,M):
+
+    def __init__(self, N, M):
+        nodes = [[] for _ in range(N)]
         for i in range(N):
             for j in range(M):
-                self.nodes[i][j] = value(i)
+                self.nodes[i].append(value(i))
     
-    def trade(self,i,j,k):
-        for _ in slef.nodes[i]:
+    def trade(self, i, j, k):
+        for _ in self.nodes[i]:
             
