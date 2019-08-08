@@ -1,4 +1,7 @@
+import random as rd
+
 class txn:
+
         proof_value = 0
         count = 0
         becounted = False
@@ -9,17 +12,18 @@ class txn:
 
 #class TXN:
 
- #   def __init__(slef, N):
-  #      slef.txn = 
+#    def __init__(slef, N):
+#       slef.txn = 
 
 
 class value:
-        owner = 0
+
+        #owner = 0
         proof = []
         ownproof = []
 
-        def __init__(self, ori_node):
-            self.owner = ori_node
+        #def __init__(self, ori_node):
+         #   self.owner = ori_node
 
         def change_own(self, new_node):
             self.owner = new_node
@@ -30,18 +34,49 @@ class value:
         def add_ownproof(self,newproof):
             self.ownproof.append(newproof)
         
-        def change_ownproof(self,newproof):
-            self.ownproof.
+        #def change_ownproof(self,newproof):
+         #   self.ownproof.
 
 
 class Node:
 
+    nodes = []
+
     def __init__(self, N, M):
-        nodes = [[] for _ in range(N)]
+        self.nodes = [[] for _ in range(N)]
         for i in range(N):
             for j in range(M):
-                self.nodes[i].append(value(i))
+                self.nodes[i].append(value())
     
-    def trade(self, i, j, k):
-        for _ in self.nodes[i]:
+    #def trade(self, i, j, k):
+     #   for _ in self.nodes[i]:
             
+def Trade(node_a, node_b, trade_index):
+
+    if len(node_a) == 0:
+        return
+
+    tx_this = txn(trade_index)
+    max_temp = 0
+    temp_index = []
+
+    for _ in range(len(node_a)):
+        if len(node_a[_].proof) = max_temp:
+            temp_index.append[_]
+        elif len(node_a[_].proof) > max_temp:
+            max_temp = len(node_a[_].proof)
+            temp_index.clear()
+            temp_index.append(_)
+
+    choice = rd.choice(temp_index)
+    node_b.append(node_a[choice]) 
+
+    if len(node_a[choice].proof) == len(node_a[choice].ownproof):
+
+
+    del node_a[choice]
+    
+    
+
+
+

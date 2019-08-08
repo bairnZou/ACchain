@@ -8,14 +8,19 @@ class qwe:
     
     
 def main():
+    '''
     a = 3
     b = 3
-    c = [[] for _ in range(4)]
+    c = [[1]*3 for _ in range(4)]
     print(c)
-    for i in range(a):
-        for j in range(b):
-            c[i].append(qwe(i,j))
-            print(c[i][j].gg)
+    for i in range(3):
+        for j in range(3):
+            print(c[i][j])
+    '''
+    a = [1,2,3]
+    del a[1]
+    print(a)
+    return  
 
 if __name__ == '__main__':
-    main()
+    a = main()
