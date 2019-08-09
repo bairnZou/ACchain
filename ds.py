@@ -51,8 +51,9 @@ class Node:
             self.nodes[i] = [value()] * M
     #def trade(self, i, j, k):
      #   for _ in self.nodes[i]:
-            
-def Trade(node_a, node_b, trade_index, TXS):
+
+
+def Trade(node_a, node_b, trade_index, TXS, BCOT_):
 
     if len(node_a) == 0:
         return False
@@ -77,16 +78,17 @@ def Trade(node_a, node_b, trade_index, TXS):
 
     if len(node_a[choice].proof) == len(node_a[choice].ownproof):
         tx_this.proof = node_a[choice].proof[:]
-    
+
     TXS.append(tx_this)
     BCOT = 0
-    
+
     for _ in node_b[-1].proof:
         TXS[_].count += 2
         BCOT += 2
 
-    with open('BCOT.txt','w') as f:
-        f.wirte(BCOT+'\t')
+    BCOT_.append(BCOT)
+    #with open('./BCOT.txt','w') as f:
+    #    f.write(str(BCOT)+'\t')
 
     del node_a[choice]
     

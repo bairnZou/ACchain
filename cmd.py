@@ -24,23 +24,23 @@ def main():
     time = 0
     check_point = 0
     trade_index = 0
-
-    if not os.path.exists('./BCOT.txt'):
-        os.mknod('./BCOT.txt')
+    BCOT_ = []
+    #if not os.path.exists('./BCOT.txt'):
+     #   os.mknod('./BCOT.txt')
         
     while True:
         for _ in range(TPS):
             trade_num = rd.sample(range(N),2)
             trade_flag = True
-            trade_flag = ds.Trade(nodes_.nodes[trade_num[0]],nodes_.nodes[trade_num[1]],trade_index,TXS)
+            trade_flag = ds.Trade(nodes_.nodes[trade_num[0]],nodes_.nodes[trade_num[1]],trade_index,TXS,BCOT_)
             
             if trade_flag:
                 trade_index += 1
             
             time += 1
-        
+            
         if time >= T:
-
+            
             for i in range(len(nodes_.nodes)):
                 for value in nodes_.nodes[i]:
                     value.proof.clear()
@@ -51,10 +51,18 @@ def main():
                 TXS[_].becounted = True
                 if TXS[_].proof:
                     for t in TXS[_].proof:
-                          
-
+                        if TXS[TXS[_].proof[t]] and TXS[TXS[_].proof[t]].becounted is False:
+                            TXS[TXS[_].proof[t]].count += m
+                            TXS[TXS[_].proof[t]].becounted = True
+            
+            for _ in range(len(TXS)-check_point):
+                TXS[_].becounted = False
+                if TXS[_].proof:
+                    for t in TXS[i].proof:
+                        TXS[TXS[_].proof[t]].becounted = False
+            
+            check_point = len(TXS)
+            print(BCOT_)
                 
-    
-
 if __name__ == '__main__':
     main()
