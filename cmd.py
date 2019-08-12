@@ -63,7 +63,7 @@ def main():
             for _ in range(len(TXS)-check_point):
                 TXS[_].becounted = False
                 if TXS[_].proof:
-                    for t in TXS[i].proof:
+                    for t in TXS[_].proof:
                         TXS[TXS[_].proof[t]].becounted = False
             
             check_point = len(TXS)
