@@ -7,14 +7,15 @@ import os
 
 def main():
     argvs = sys.argv
-    if len(argvs) < 6:
+    if len(argvs) < 7:
         sys.exit(0)
 
     N = int(sys.argv[1])
     NumofV = int(sys.argv[2])
     m = int(sys.argv[3])
     TPS = int(sys.argv[4])
-    T = int(sys.argv[5]) 
+    T = int(sys.argv[5])
+    Rotation = int(sys.argv[6])
     
     nodes_ = ds.Node(N, NumofV)
     #print(nodes.nodes[1][0].owner)
@@ -25,10 +26,14 @@ def main():
     check_point = 0
     trade_index = 0
     BCOT_ = []
-    #if not os.path.exists('./BCOT.txt'):
-     #   os.mknod('./BCOT.txt')
-        
-    while True:
+    
+    if not os.path.exists('./BCOT.txt'):
+        os.mknod('./BCOT.txt')
+    f=open('./BCOT.txt', "r+")
+    f.truncate()
+    f.close()
+
+    while Rotation:
         for _ in range(TPS):
             trade_num = rd.sample(range(N),2)
             trade_flag = True
@@ -62,7 +67,11 @@ def main():
                         TXS[TXS[_].proof[t]].becounted = False
             
             check_point = len(TXS)
+            Rotation -= 1
             print(BCOT_)
+            with open('./BCOT.txt', 'a') as f:
+                f.write(' '.join(str(BCOT_)))
+                f.write('\n')
                 
 if __name__ == '__main__':
     main()
