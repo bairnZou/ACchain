@@ -73,6 +73,7 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
     choice = rd.choice(temp_index)
     node_b.append(node_a[choice])
     node_b[-1].proof.append(trade_index)
+    #print(node_b[-1].proof)
     node_b[-1].ownproof.clear()
     node_b[-1].ownproof.append(trade_index)
 
@@ -92,7 +93,7 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
 
     del node_a[choice]
     
-    
+    return True
 
 
 
