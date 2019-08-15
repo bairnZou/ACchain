@@ -44,7 +44,6 @@ class Node:
     nodes = []
     S = []
     N = 0
-
     def __init__(self, N, M):
         self.N = N
         self.nodes = [[] for _ in range(N)]
@@ -59,7 +58,7 @@ class Node:
      #   for _ in self.nodes[i]:
 
 
-def Trade(node_a, node_b, trade_index, TXS, BCOT_):
+def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_):
 
     if len(node_a) == 0:
         return False
@@ -83,11 +82,27 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
     node_b[-1].ownproof.clear()
     node_b[-1].ownproof.append(trade_index)
 
+    if node_b[-1].proof:
+        for i in node_b[-1].proof:
+            node[a][t] -= 1
+
     if len(node_a[choice].proof) == len(node_a[choice].ownproof):
         tx_this.proof = node_a[choice].proof[:]
         #print('eee')
 
     TXS.append(tx_this)
+
+    for t in node_b[-1].proof:
+        if t in nodes_C[b]:
+            nodes_C[b][t] += 1
+        else:
+            nodes_C[b][t] = 1
+
+    tempCount = 0
+    for _ in node[b].values:
+        if _ > 0:
+            tempCount += 1
+    nodes_.S[b] = max(tempCount*S_txn,nodes_.S[b])
     #print(len(node_b))
     BCOT = 0
 
@@ -105,6 +120,9 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
         value.proof.append(trade_index)
         value.ownproof.append(trade_index)
     map(update,node_a)
+    if trade_index in nodes_C[a]:
+        nodes_C[a][trade_index] += 1
+    else: nodes_C[a][trade_index] = 1
     return True
 
 
