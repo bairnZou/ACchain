@@ -47,7 +47,7 @@ def main():
             trade_flag = ds.Trade(nodes_.nodes[trade_num[0]],nodes_.nodes[trade_num[1]],trade_index,TXS,BCOT_)
             #print(trade_num)
             #print(nodes_.nodes[trade_num[1]][-1].proof)
-            print(trade_flag)
+            #print(trade_flag)
             if trade_flag:
                 trade_index += 1
             
@@ -56,7 +56,7 @@ def main():
         if time >= T:
 
             time = 0
-
+            print('aaa')
             for i in range(len(nodes_.nodes)):
                 for value in nodes_.nodes[i]:
                     value.proof.clear()
@@ -64,14 +64,16 @@ def main():
                     
             
             for _ in range(len(TXS)-check_point):
-                
+                #print('bbb')
                 _ = _ + check_point
                 TXS[_].count += m
                 TXS[_].becounted = True
                 if TXS[_].proof:
+                    print('ccc')
                     for t in TXS[_].proof:
-                        
+                        print('yyy')
                         if TXS[TXS[_].proof[t]] and TXS[TXS[_].proof[t]].becounted is False:
+                            print('xxx')
                             TXS[TXS[_].proof[t]].count += m
                             #print(TXS[_].proof[t])
                             TXS[TXS[_].proof[t]].becounted = True

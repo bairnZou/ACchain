@@ -73,26 +73,32 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
     choice = rd.choice(temp_index)
     node_b.append(node_a[choice])
     node_b[-1].proof.append(trade_index)
-    #print(node_b[-1].proof)
+    #print(node_b[-1].proof,'x')
     node_b[-1].ownproof.clear()
     node_b[-1].ownproof.append(trade_index)
 
     if len(node_a[choice].proof) == len(node_a[choice].ownproof):
         tx_this.proof = node_a[choice].proof[:]
+        #print('eee')
 
     TXS.append(tx_this)
+    #print(len(node_b))
     BCOT = 0
 
     for _ in node_b[-1].proof:
         TXS[_].count += 2
         BCOT += 2
-
+    #print(BCOT)
+    print(len(TXS))
     BCOT_.append(BCOT)
     #with open('./BCOT.txt','w') as f:
     #    f.write(str(BCOT)+'\t')
 
     del node_a[choice]
-    
+    def update(value):
+        value.proof.append(trade_index)
+        value.ownproof.append(trade_index)
+    map(update,node_a)
     return True
 
 
