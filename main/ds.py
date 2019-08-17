@@ -19,13 +19,13 @@ class txn:
 
 class value:
 
-        #owner = 0
+        owner = []
         proof = []
         ownproof = []
-        #def __init__(self, ori_node):
-         #   self.owner = ori_node
+        def __init__(self, ori_node):
+            self.owner = ori_node
+            self.proof = []
         
-
         def change_own(self, new_node):
             self.owner = new_node
 
@@ -51,8 +51,7 @@ class Node:
         for i in range(N):
             #for j in range(M):
             #    self.nodes[i].append(value())
-            for j in range(M):
-                self.nodes[i].append(value())
+            self.nodes[i] = [value([i,j]) for j in range(M)]
 
     def changeS(self, S_):
         self.S = [S_] * self.N
@@ -68,7 +67,8 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
     tx_this = txn(trade_index)
     max_temp = 0
     temp_index = []
-
+    #print(id(node_b))
+    #print(id(node_b[1]))
     for _ in range(len(node_a)):
         if len(node_a[_].proof) == max_temp:
             temp_index.append(_)
@@ -92,6 +92,7 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
     #print(len(node_b))
     BCOT = 0
     print(node_b[-1].proof)
+    
     for _ in node_b[-1].proof:
         TXS[_].count += 2
         BCOT += 2

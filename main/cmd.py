@@ -70,13 +70,14 @@ def main():
                 TXS[_].becounted = True
                 if TXS[_].proof:
                     #print('ccc')
+                    print(TXS[_].proof)
                     for t in TXS[_].proof:
                         #print('yyy')
-                        if TXS[TXS[_].proof[t]] and TXS[TXS[_].proof[t]].becounted is False:
+                        if TXS[t] and TXS[t].becounted is False:
                             #print('xxx')
-                            TXS[TXS[_].proof[t]].count += m
+                            TXS[t].count += m
                             #print(TXS[_].proof[t])
-                            TXS[TXS[_].proof[t]].becounted = True
+                            TXS[t].becounted = True
             
             for _ in range(len(TXS)-check_point):
                 _ = _ + check_point
@@ -85,7 +86,7 @@ def main():
                 if TXS[_].proof:
                     for t in TXS[_].proof:
                         
-                        TXS[TXS[_].proof[t]].becounted = False
+                        TXS[t].becounted = False
             
             check_point = len(TXS)
             Rotation -= 1

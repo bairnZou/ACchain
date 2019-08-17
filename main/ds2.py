@@ -19,11 +19,11 @@ class txn:
 
 class value:
 
-        #owner = 0
+        owner = []
         proof = []
         ownproof = []
-        #def __init__(self, ori_node):
-         #   self.owner = ori_node
+        def __init__(self, ori_node):
+            self.owner = ori_node
         
 
         def change_own(self, new_node):
@@ -50,7 +50,7 @@ class Node:
         for i in range(N):
             #for j in range(M):
             #    self.nodes[i].append(value())
-            self.nodes[i] = [value()] * M
+            self.nodes[i] = [value([i,j]) for j in range(M)]
 
     def changeS(self, S_):
         self.S = [S_] * self.N
