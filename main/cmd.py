@@ -56,7 +56,7 @@ def main():
         if time >= T:
 
             time = 0
-            print('aaa')
+            #print('aaa')
             for i in range(len(nodes_.nodes)):
                 for value in nodes_.nodes[i]:
                     value.proof.clear()
@@ -69,11 +69,11 @@ def main():
                 TXS[_].count += m
                 TXS[_].becounted = True
                 if TXS[_].proof:
-                    print('ccc')
+                    #print('ccc')
                     for t in TXS[_].proof:
-                        print('yyy')
+                        #print('yyy')
                         if TXS[TXS[_].proof[t]] and TXS[TXS[_].proof[t]].becounted is False:
-                            print('xxx')
+                            #print('xxx')
                             TXS[TXS[_].proof[t]].count += m
                             #print(TXS[_].proof[t])
                             TXS[TXS[_].proof[t]].becounted = True

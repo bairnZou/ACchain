@@ -51,7 +51,8 @@ class Node:
         for i in range(N):
             #for j in range(M):
             #    self.nodes[i].append(value())
-            self.nodes[i] = [value()] * M
+            for j in range(M):
+                self.nodes[i].append(value())
 
     def changeS(self, S_):
         self.S = [S_] * self.N
@@ -78,10 +79,10 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
 
     choice = rd.choice(temp_index)
     node_b.append(node_a[choice])
-    node_b[-1].proof.append(trade_index)
+    node_b[-1].add_proof(trade_index)
     #print(node_b[-1].proof,'x')
     node_b[-1].ownproof.clear()
-    node_b[-1].ownproof.append(trade_index)
+    node_b[-1].add_ownproof(trade_index)
 
     if len(node_a[choice].proof) == len(node_a[choice].ownproof):
         tx_this.proof = node_a[choice].proof[:]
@@ -90,12 +91,12 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
     TXS.append(tx_this)
     #print(len(node_b))
     BCOT = 0
-
+    print(node_b[-1].proof)
     for _ in node_b[-1].proof:
         TXS[_].count += 2
         BCOT += 2
     #print(BCOT)
-    print(len(TXS))
+    #print(len(TXS))
     BCOT_.append(BCOT)
     #with open('./BCOT.txt','w') as f:
     #    f.write(str(BCOT)+'\t')

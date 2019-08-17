@@ -1,26 +1,21 @@
-class qwe:
-    _z = 1
+class A:
+    A = 0
+    B = 0
+    C = []
     def __init__(self, a, b):
-        self.gg = a
-        self.hh = b
+        self.A = a
+        self.B = b
 
-
-    
-    
 def main():
-    '''
-    a = 3
-    b = 3
-    c = [[1]*3 for _ in range(4)]
-    print(c)
-    for i in range(3):
-        for j in range(3):
-            print(c[i][j])
-    '''
-    a = [1,2,3]
-    del a[1]
-    print(a)
-    return  
+    a = [[] for i in range(10)]
+    for i in range(10):
+            a[i] = [A(i,j) for j in range(10)]
+    for i in range(10):
+        for j in range(10):
+            a[i][j].C = [i,j]
+    print(a[3][3].C)
+    print(a[4][4].C)
+
 
 if __name__ == '__main__':
-    a = main()
+    main()
