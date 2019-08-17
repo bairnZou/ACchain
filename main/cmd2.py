@@ -31,7 +31,7 @@ def main():
     TXS = []
     nodes_C = [{} for i in range(N)]
     #BCOT = 0
-    T_ac = np.random.normal( , , 10)
+    T_ac = sorted(np.random.normal( , , 10))
 
     index_ac = 0
     node_ac = [0] * N

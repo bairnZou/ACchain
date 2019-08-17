@@ -9,6 +9,9 @@ class txn:
 
         def __init__(self, index):
             self.proof_value = index
+            self.proof = []
+            self.count = 0
+            self.becounted = False
 
 
 #class TXN:
@@ -24,7 +27,8 @@ class value:
         ownproof = []
         def __init__(self, ori_node):
             self.owner = ori_node
-        
+            self.proof = []
+            self.ownproof = []
 
         def change_own(self, new_node):
             self.owner = new_node
@@ -44,6 +48,7 @@ class Node:
     nodes = []
     S = []
     N = 0
+
     def __init__(self, N, M):
         self.N = N
         self.nodes = [[] for _ in range(N)]
@@ -51,7 +56,8 @@ class Node:
             #for j in range(M):
             #    self.nodes[i].append(value())
             self.nodes[i] = [value([i,j]) for j in range(M)]
-
+        self.S = []
+        
     def changeS(self, S_):
         self.S = [S_] * self.N
     #def trade(self, i, j, k):
