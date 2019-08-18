@@ -100,7 +100,7 @@ def main():
             tmp = i.count
             #print(len(TXS))
             f.write(str(tmp))
-            f.write('\t')
+            f.write('\n')
 
 if __name__ == '__main__':
     main()

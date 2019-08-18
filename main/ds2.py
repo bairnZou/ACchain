@@ -65,7 +65,7 @@ class Node:
      #   for _ in self.nodes[i]:
 
 
-def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_):
+def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_, S_txn):
 
     if len(node_a) == 0:
         return False
@@ -91,7 +91,8 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_):
 
     if node_b[-1].proof:
         for i in node_b[-1].proof:
-            nodes_C[a][t] -= 1
+            if  i in nodes_C[a]:
+                nodes_C[a][i] -= 1
 
     if len(node_a[choice].proof) == len(node_a[choice].ownproof):
         tx_this.proof = node_a[choice].proof[:]
@@ -107,14 +108,15 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_):
 
     tempCount = 0
 
-    for _ in nodes_C[b].values:
+    for _ in nodes_C[b].values():
         if _ > 0:
             tempCount += 1
-    nodes_.S[b] = max(tempCount*S_txn, nodes_.S[b])
+    nodes_.S[b] = max(tempCount * S_txn, nodes_.S[b])
 
     #print(len(node_b))
     BCOT = 0
-
+    nodes_.S[a] += S_txn
+    
     for _ in node_b[-1].proof:
         TXS[_].count += 2
         BCOT += 2
