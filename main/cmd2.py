@@ -31,7 +31,10 @@ def main():
     TXS = []
     nodes_C = [{} for i in range(N)]
     #BCOT = 0
-    T_ac = sorted(np.random.normal( , , 10))
+    T_ac = list(map(lambda x: x*Rotation, sorted(list(np.random.normal(0, 1, 10)))))
+
+    while T_ac[-1] < Rotation:
+        T_ac = list(map(lambda x: x*Rotation, sorted(list(np.random.normal(0, 1, 10)))))
 
     index_ac = 0
     node_ac = [0] * N
@@ -67,7 +70,7 @@ def main():
 
     while Rotation:
         for _ in range(TPS):
-            trade_num = rd.sample(range(N),2)
+            trade_num = rd.sample(range(N), 2)
             trade_flag = True
             node_ac[trade_num[0]] = 1
             trade_flag = ds2.Trade(nodes_.nodes[trade_num[0]],nodes_.nodes[trade_num[1]],trade_index,TXS,BCOT_, nodes_C,trade_num[0],trade_num[1],nodes_)

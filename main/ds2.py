@@ -25,6 +25,7 @@ class value:
         owner = []
         proof = []
         ownproof = []
+        
         def __init__(self, ori_node):
             self.owner = ori_node
             self.proof = []
@@ -36,7 +37,7 @@ class value:
         def add_proof(self, newproof):
             self.proof.append(newproof)
     
-        def add_ownproof(self,newproof):
+        def add_ownproof(self, newproof):
             self.ownproof.append(newproof)
         
         #def change_ownproof(self,newproof):
@@ -55,9 +56,9 @@ class Node:
         for i in range(N):
             #for j in range(M):
             #    self.nodes[i].append(value())
-            self.nodes[i] = [value([i,j]) for j in range(M)]
+            self.nodes[i] = [value([i, j]) for j in range(M)]
         self.S = []
-        
+
     def changeS(self, S_):
         self.S = [S_] * self.N
     #def trade(self, i, j, k):
@@ -90,7 +91,7 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_):
 
     if node_b[-1].proof:
         for i in node_b[-1].proof:
-            node[a][t] -= 1
+            nodes_C[a][t] -= 1
 
     if len(node_a[choice].proof) == len(node_a[choice].ownproof):
         tx_this.proof = node_a[choice].proof[:]
@@ -105,10 +106,12 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_):
             nodes_C[b][t] = 1
 
     tempCount = 0
-    for _ in node[b].values:
+
+    for _ in nodes_C[b].values:
         if _ > 0:
             tempCount += 1
-    nodes_.S[b] = max(tempCount*S_txn,nodes_.S[b])
+    nodes_.S[b] = max(tempCount*S_txn, nodes_.S[b])
+
     #print(len(node_b))
     BCOT = 0
 
@@ -122,13 +125,16 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_):
     #    f.write(str(BCOT)+'\t')
 
     del node_a[choice]
+
     def update(value):
         value.proof.append(trade_index)
         value.ownproof.append(trade_index)
-    map(update,node_a)
+    map(update, node_a)
+
     if trade_index in nodes_C[a]:
         nodes_C[a][trade_index] += 1
     else: nodes_C[a][trade_index] = 1
+
     return True
 
 
