@@ -9,7 +9,7 @@ class txn:
 
         def __init__(self, index):
             self.proof_value = index
-            self.proof = p[]
+            self.proof = []
             self.count = 0
             self.becounted = False
 
@@ -44,8 +44,8 @@ class Node:
         for i in range(N):
             #for j in range(M):
             #    self.nodes[i].append(value())
-            self.nodes[i] = [value([i,j]) for j in range(M)]
-        self.S = []
+            self.nodes[i] = [value() for j in range(M)]
+        
 
 
 def Trade(node_a, node_b, trade_index, TXS, BCOT_):
@@ -84,7 +84,6 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_):
         TXS[_].count += 1
         BCOT += 1
     #print(BCOT)
-    print(len(TXS))
     BCOT_.append(BCOT)
     #with open('./BCOT.txt','w') as f:
     #    f.write(str(BCOT)+'\t')

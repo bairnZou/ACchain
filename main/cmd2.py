@@ -32,10 +32,10 @@ def main():
     TXS = []
     nodes_C = [{} for i in range(N)]
     #BCOT = 0
-    T_ac = list(map(lambda x: x*Rotation, sorted(list(np.random.normal(0, 1, 10)))))
+    T_ac = list(map(lambda x: x*Rotation, sorted(list(np.random.normal(0, 1, Rotation)))))
 
     while T_ac[-1] < Rotation:
-        T_ac = list(map(lambda x: x*Rotation, sorted(list(np.random.normal(0, 1, 10)))))
+        T_ac = list(map(lambda x: x*Rotation, sorted(list(np.random.normal(0, 1, Rotation)))))
 
     index_ac = 0
     node_ac = [0] * N
