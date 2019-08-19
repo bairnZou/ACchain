@@ -83,22 +83,35 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_, S_txn)
             temp_index.append(_)
 
     choice = rd.choice(temp_index)
+
+    if len(node_a[choice].proof) == len(node_a[choice].ownproof):
+        tx_this.proof = node_a[choice].proof[:]
+        #print('eee')
+
     node_b.append(node_a[choice])
     node_b[-1].proof.append(trade_index)
     #print(node_b[-1].proof,'x')
     node_b[-1].ownproof.clear()
     node_b[-1].ownproof.append(trade_index)
 
+    del node_a[choice]
+
+    for _ in node_a:
+        _.proof.append(trade_index)
+        _.ownproof.append(trade_index)
+
     if node_b[-1].proof:
         for i in node_b[-1].proof:
             if  i in nodes_C[a]:
                 nodes_C[a][i] -= 1
 
-    if len(node_a[choice].proof) == len(node_a[choice].ownproof):
-        tx_this.proof = node_a[choice].proof[:]
-        #print('eee')
+
 
     TXS.append(tx_this)
+
+    for _ in tx_this.proof:
+        if TXS[_] == TXS[0]:
+            print('TXS[0]被包含在proof中')
 
     for t in node_b[-1].proof:
         if t in nodes_C[b]:
@@ -121,23 +134,18 @@ def Trade(node_a, node_b, trade_index, TXS, BCOT_, nodes_C, a, b, nodes_, S_txn)
         TXS[_].count += 2
         BCOT += 2
     #print(BCOT)
-    print(len(TXS))
+    #print(len(TXS))
     BCOT_.append(BCOT)
     #with open('./BCOT.txt','w') as f:
     #    f.write(str(BCOT)+'\t')
 
-    del node_a[choice]
 
-    def update(value):
-        value.proof.append(trade_index)
-        value.ownproof.append(trade_index)
-    map(update, node_a)
+
 
     if trade_index in nodes_C[a]:
         nodes_C[a][trade_index] += 1
     else: nodes_C[a][trade_index] = 1
 
     return True
-
 
 

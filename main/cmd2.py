@@ -19,8 +19,10 @@ def main():
     T = int(sys.argv[5])
     Rotation = int(sys.argv[6])
 
+    #this_file = str(N) + ' ' + str(NumofV) + ' ' +str(m) + ' ' +str(TPS) + ' ' +str(T) + ' ' + str(Rotation)
+
     T_ac = []
-    S_a,S_cc,S_txn = 1,1,1      #参数
+    S_a,S_cc,S_txn = 256,1024,500      #参数，设置每个摘要的大小为256kb，每个CC块为1024kb，每个交易为500kb
 
     nodes_ = ds2.Node(N, NumofV)
     nodes_.changeS(S_txn)
@@ -87,13 +89,13 @@ def main():
             if trade_flag:
                 trade_index += 1
             
-            time += 1
-            time_ac += 1
+        time += 1
+        time_ac += 1
 
         if time_ac > T_ac[index_ac]:
 
             tmpSum = reduce(lambda x,y:x+y,node_ac)
-            SS_a = S_a * tmpSum
+            SS_a += S_a * tmpSum
             index_ac += 1
             time_ac = 0
             node_ac = [0] * N
@@ -102,7 +104,7 @@ def main():
             
             SS_c += S_cc
             time = 0
-            print('aaa')
+            #print('aaa')
             
             for i in range(len(nodes_.nodes)):
                 for j in nodes_.nodes[i]:
@@ -118,18 +120,25 @@ def main():
             for _ in range(len(TXS)-check_point):
                 #print('bbb')
                 _ = _ + check_point
-                TXS[_].count += m
-                TXS[_].becounted = True
+
+                if TXS[_].becounted == False:
+                    TXS[_].count += m
+                    TXS[_].becounted = True
+                    if _ == 0:
+                        print('作为交易被传输，TXS[0].count += m, =', TXS[0].count)
+
                 if TXS[_].proof:
                     #print('ccc')
-                    print(TXS[_].proof)
+                    #print(TXS[_].proof)
                     for t in TXS[_].proof:
                         #print('yyy')
-                        if TXS[t] and TXS[t].becounted is False:
+                        if TXS[t] and TXS[t].becounted == False:
                             #print('xxx')
                             TXS[t].count += m
                             #print(TXS[_].proof[t])
                             TXS[t].becounted = True
+                            if t == 0:
+                                print('作为proof被传输，TXS[0].count += m, =', TXS[0].count)
             
             for _ in range(len(TXS)-check_point):
                 _ = _ + check_point
@@ -137,24 +146,25 @@ def main():
                 TXS[_].becounted = False
                 if TXS[_].proof:
                     for t in TXS[_].proof:
-                        
                         TXS[t].becounted = False
             
             check_point = len(TXS)
-            Rotation -= 1
-            #print(BCOT_)
             
-            with open('./BCOT.txt', 'a') as f:
-                f.write(' '.join(str(BCOT_)))
-                f.write('\n')
+            #with open('./BCOT.txt', 'a') as f:
+                #f.write(' '.join(str(BCOT_)))
+                #f.write('\n')
 
-    print(SS_a,SS_c)
+        Rotation -= 1
+
+    print('SS_a =', SS_a, 'SS_c =', SS_c)
+    
     with open('./TBCPT.txt', 'a') as f:
         for i in TXS:
             tmp = i.count
             #print(len(TXS))
             f.write(str(tmp))
             f.write('\t')
+
     with open('./ssa.txt', 'a') as f:
         f.write(str(SS_a))
         f.write('\n')
